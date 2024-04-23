@@ -21,7 +21,7 @@ public class DialogManager : MonoBehaviour
 
     void Start()
     {
-        LoadDialogData("DialogData.txt");
+        LoadDialogData(dialogDataFile.name + ".txt");
         StartDialog();
     }
 
