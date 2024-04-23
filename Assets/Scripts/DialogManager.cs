@@ -1,23 +1,29 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System.Collections.Generic;
 using TMPro;
+using System.Collections;
 
 public class DialogManager : MonoBehaviour
 {
-    public GameObject portraitImg;
-    public TMP_Text dialogText;
-    public GameObject dialogBox;
-    public float typingSpeed = 0.05f; 
+    public Object dialogDataFile;
 
-    private Image[] currentPortrait;
-    private int currentPortraitIndex;
-    private string[] currentDialog;
+    public GameObject dialogBox;
+    public TMP_Text dialogText;
+    public GameObject portraitContainer;
+    public float typingSpeed = 0.05f;
+
+    private List<string> dialogTexts = new List<string>();
+    private List<string> portraitNames = new List<string>();
     private int currentLine = 0;
     private bool isTyping = false;
 
-    public string[] test;
-    public Image[] test2;
+    void Start()
+    {
+        LoadDialogData("DialogData.txt");
+        StartDialog();
+    }
 
     void Update()
     {
@@ -27,38 +33,54 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    public void StartDialog(string[] dialog, Image[] portrait)
+    void LoadDialogData(string fileName)
     {
-        currentPortrait = portrait;
-        currentDialog = dialog;
+        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        string[] lines = File.ReadAllLines(filePath);
+
+        foreach (string line in lines)
+        {
+            string portraitTag = line.Substring(1, line.IndexOf('>') - 1);
+            string dialog = line.Substring(line.IndexOf('>') + 1, line.LastIndexOf('<') - line.IndexOf('>') - 1);
+
+            portraitNames.Add(portraitTag);
+            dialogTexts.Add(dialog);
+        }
+    }
+
+    public void StartDialog()
+    {
         currentLine = 0;
         ShowDialog();
     }
 
     public void ShowDialog()
     {
-        if (currentLine < currentDialog.Length)
+        DestroyPortraits();
+
+        if (currentLine < dialogTexts.Count)
         {
             dialogBox.SetActive(true);
-            StartCoroutine(TypeText(currentDialog[currentLine]));
+            StartCoroutine(TypeText(dialogTexts[currentLine]));
+
+            DisplayPortrait(portraitNames[currentLine]);
+
             currentLine++;
         }
         else
         {
             EndDialog();
         }
+    }
 
-        if(currentPortraitIndex < currentPortrait.Length)
+    void DestroyPortraits()
+    {
+        foreach (Transform child in portraitContainer.transform)
         {
-            portraitImg.gameObject.SetActive(true);
-            portraitImg.GetComponent<Image>().sprite = test2[currentPortraitIndex].sprite;
-            currentPortraitIndex++;
-        }
-        else
-        {
-            EndDialog();
+            Destroy(child.gameObject);
         }
     }
+
 
     IEnumerator TypeText(string text)
     {
@@ -72,16 +94,24 @@ public class DialogManager : MonoBehaviour
         isTyping = false;
     }
 
-    public void EndDialog()
+    void DisplayPortrait(string portraitName)
     {
-        portraitImg.gameObject.SetActive(false);
-        dialogBox.SetActive(false);
-        dialogText.gameObject.SetActive(false);
-        
+        GameObject portraitPrefab = Resources.Load<GameObject>("Portraits/" + portraitName + "Prefab");
+        if (portraitPrefab != null)
+        {
+            Instantiate(portraitPrefab, portraitContainer.transform);
+        }
+        else
+        {
+            Debug.LogWarning("Portrait prefab not found for: " + portraitName);
+        }
     }
 
-    private void Start()
+
+    public void EndDialog()
     {
-        StartDialog(test, test2);
+        dialogBox.SetActive(false);
+        dialogText.gameObject.SetActive(false);
+        portraitContainer.SetActive(false);
     }
 }

@@ -1,0 +1,3 @@
+<JackSmile>Hello, how are you?</JackSmile>
+<JackNeutral>Hey, I'm really glad to hear that. Maybe you and I can go out and get a drink together.</JackNeutral>
+<JackSmile>As friends, of course!</JackSmile>
