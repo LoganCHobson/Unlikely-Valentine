@@ -5,7 +5,7 @@ using TMPro;
 
 public class DialogManager : MonoBehaviour
 {
-    public Image portraitImg;
+    public GameObject portraitImg;
     public TMP_Text dialogText;
     public GameObject dialogBox;
     public float typingSpeed = 0.05f; 
@@ -39,7 +39,6 @@ public class DialogManager : MonoBehaviour
     {
         if (currentLine < currentDialog.Length)
         {
-            
             dialogBox.SetActive(true);
             StartCoroutine(TypeText(currentDialog[currentLine]));
             currentLine++;
@@ -52,6 +51,7 @@ public class DialogManager : MonoBehaviour
         if(currentPortraitIndex < currentPortrait.Length)
         {
             portraitImg.gameObject.SetActive(true);
+            portraitImg.GetComponent<Image>().sprite = test2[currentPortraitIndex].sprite;
             currentPortraitIndex++;
         }
         else

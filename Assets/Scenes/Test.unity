@@ -256,14 +256,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1324d22756cd4d747ad04a8a537501e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portraitImg: {fileID: 0}
+  portraitImg: {fileID: 2102334619}
   dialogText: {fileID: 1288989919}
   dialogBox: {fileID: 1132977480}
   typingSpeed: 0.05
   test:
   - Howdy
   - You new around here?
-  test2: []
+  - Wow thats great!
+  - Maybe you can show me around.
+  - Yeah, you know/ The sights the scenes, all of it!
+  - Just- Whatever and wherever you can take me.
+  - Somewhere relaxing or exciting, you pick!
+  - But I don't want to pick!
+  test2:
+  - {fileID: 5804229095418507409, guid: ba8deeafdcbab6e479f77d565bd906f8, type: 3}
+  - {fileID: 4414738601202529658, guid: 3740097ec8e3ad845bdb4eda99f0fe1c, type: 3}
+  - {fileID: 2199286542488725152, guid: 490a82f241d5e2a42b34d387bb1989ef, type: 3}
+  - {fileID: 8648316004798321803, guid: 947b23394223b3e4782668eff7eb78b4, type: 3}
+  - {fileID: 8918953926216220529, guid: 58ecfb929dd5f354989beb84d113b6f2, type: 3}
+  - {fileID: 1208524595118538398, guid: f0cc7f40f39f00c47b793d144da1ab89, type: 3}
+  - {fileID: 892860907067223251, guid: 74fc7e4f480a52c4dab3479c522583fc, type: 3}
+  - {fileID: 2291331031603264332, guid: 532129c38dedd9c46ba49002712e6eec, type: 3}
 --- !u!4 &981681580
 Transform:
   m_ObjectHideFlags: 0
@@ -823,7 +837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 623399595, guid: a389c5ba34c3b5445a21a0aeaaa423e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
