@@ -27,9 +27,18 @@ public class DialogManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && !isTyping)
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            ShowDialog();
+            if (!isTyping)
+            {
+                ShowDialog();
+            }
+            else
+            {
+                StopCoroutine("TypeText");
+                isTyping = false;
+                dialogText.text = dialogTexts[currentLine - 1];
+            }
         }
     }
 
@@ -88,8 +97,15 @@ public class DialogManager : MonoBehaviour
         dialogText.text = "";
         foreach (char letter in text)
         {
-            dialogText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            if (isTyping)
+            {
+                dialogText.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            else
+            {
+                yield return null;
+            }
         }
         isTyping = false;
     }
