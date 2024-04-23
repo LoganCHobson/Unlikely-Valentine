@@ -1,16 +1,35 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DialogManager : MonoBehaviour
 {
-    public Text dialogText;
+    public Image portraitImg;
+    public TMP_Text dialogText;
     public GameObject dialogBox;
+    public float typingSpeed = 0.05f; 
 
+    private Image[] currentPortrait;
+    private int currentPortraitIndex;
     private string[] currentDialog;
     private int currentLine = 0;
+    private bool isTyping = false;
 
-    public void StartDialog(string[] dialog)
+    public string[] test;
+    public Image[] test2;
+
+    void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return) && !isTyping)
+        {
+            ShowDialog();
+        }
+    }
+
+    public void StartDialog(string[] dialog, Image[] portrait)
+    {
+        currentPortrait = portrait;
         currentDialog = dialog;
         currentLine = 0;
         ShowDialog();
@@ -20,9 +39,20 @@ public class DialogManager : MonoBehaviour
     {
         if (currentLine < currentDialog.Length)
         {
+            
             dialogBox.SetActive(true);
-            dialogText.text = currentDialog[currentLine];
+            StartCoroutine(TypeText(currentDialog[currentLine]));
             currentLine++;
+        }
+        else
+        {
+            EndDialog();
+        }
+
+        if(currentPortraitIndex < currentPortrait.Length)
+        {
+            portraitImg.gameObject.SetActive(true);
+            currentPortraitIndex++;
         }
         else
         {
@@ -30,9 +60,28 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    IEnumerator TypeText(string text)
+    {
+        isTyping = true;
+        dialogText.text = "";
+        foreach (char letter in text)
+        {
+            dialogText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+        isTyping = false;
+    }
+
     public void EndDialog()
     {
+        portraitImg.gameObject.SetActive(false);
         dialogBox.SetActive(false);
-        // Additional logic for ending dialog (e.g., reward player, trigger events, etc.)
+        dialogText.gameObject.SetActive(false);
+        
+    }
+
+    private void Start()
+    {
+        StartDialog(test, test2);
     }
 }
