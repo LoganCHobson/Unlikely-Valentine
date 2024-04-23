@@ -1,12 +1,13 @@
-using UnityEngine;
-using UnityEngine.UI;
-using System.IO;
-using System.Collections.Generic;
-using TMPro;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using TMPro;
+using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
+    public static DialogManager instance;
+
     public Object dialogDataFile;
 
     public GameObject dialogBox;
@@ -19,10 +20,28 @@ public class DialogManager : MonoBehaviour
     private int currentLine = 0;
     private bool isTyping = false;
 
-    void Start()
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void InitiateConversation( )
     {
         LoadDialogData(dialogDataFile.name + ".txt");
         StartDialog();
+    }
+    void Start()
+    {
+        /*LoadDialogData(dialogDataFile.name + ".txt");
+        StartDialog();
+        */
     }
 
     void Update()
@@ -42,7 +61,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    void LoadDialogData(string fileName)
+     void LoadDialogData(string fileName)
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         string[] lines = File.ReadAllLines(filePath);
@@ -69,6 +88,8 @@ public class DialogManager : MonoBehaviour
 
         if (currentLine < dialogTexts.Count)
         {
+            dialogText.gameObject.SetActive(true);
+            portraitContainer.gameObject.SetActive(true);   
             dialogBox.SetActive(true);
             StartCoroutine(TypeText(dialogTexts[currentLine]));
 
