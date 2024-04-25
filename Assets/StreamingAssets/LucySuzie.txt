@@ -1,0 +1,7 @@
+<LucySmile>Hello, how are you?</LucySmile>
+<SuzieSmile>Oh! Hiya Lucy! I didn't see you there! Im doing great! What have you been up to?</SuzieSmile>
+<LucySmile>Thats alright, Suzie. I've been running around playing Match Maker.</LucySmile>
+<SuzieSmile>Match Maker? Shoulden't you be focusing on your own valentine?</SuzieSmile>
+<LucySmile>Ah, I don't know, Suzie. These days its more worth seeing others happy than worrying about me.</LucySmile>
+<SuzieSmile>Oh. . Well don't get down. Ill see you later okay?</SuzieSmile>
+<LucySmile>Alright! See you later!</LucySmile>

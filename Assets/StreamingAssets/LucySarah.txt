@@ -1,0 +1,9 @@
+<LucySmile>Um. . excuse me? Miss?</LucySmile>
+<SarahSmile>Oh hello there. A fine day we are having, no?</SarahSmile>
+<LucySmile>Yes! This might seem forwards, but I think I know who your valentine is!</LucySmile>
+<SarahSmile>*TEHE* Is that so? Care to enlighten me?</SarahSmile>
+<LucySmile>Mhm! It's that man right there!</LucySmile>
+<SarahSmile>Quite the coincidence. I've been married to that gentleman for 40 years.</SarahSmile>
+<LucySmile>. . .</LucySmile>
+<LucySmile>Oh.</LucySmile>
+<LucySmile>Fair enough. Sorry to bother you! Have a great day!</LucySmile>
