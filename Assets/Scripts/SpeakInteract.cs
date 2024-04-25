@@ -16,8 +16,9 @@ public class SpeakInteract : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.E) && !dialogManager.dialogBox.activeInHierarchy && !dialogManager.isTyping)
             {
+                Debug.Log("Interacted");
                 dialogManager.dialogDataFile = script;
                 dialogManager.InitiateConversation();
             }

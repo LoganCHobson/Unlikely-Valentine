@@ -18,7 +18,8 @@ public class DialogManager : MonoBehaviour
     private List<string> dialogTexts = new List<string>();
     private List<string> portraitNames = new List<string>();
     private int currentLine = 0;
-    private bool isTyping = false;
+    [HideInInspector]
+    public bool isTyping = false;
 
     private void Awake()
     {
@@ -56,7 +57,6 @@ public class DialogManager : MonoBehaviour
             {
                 StopCoroutine("TypeText");
                 isTyping = false;
-                dialogText.text = dialogTexts[currentLine - 1];
             }
         }
     }
@@ -92,6 +92,7 @@ public class DialogManager : MonoBehaviour
             portraitContainer.gameObject.SetActive(true);   
             dialogBox.SetActive(true);
             StartCoroutine(TypeText(dialogTexts[currentLine]));
+            StopCoroutine(TypeText(dialogTexts[currentLine]));
 
             DisplayPortrait(portraitNames[currentLine]);
 
@@ -125,7 +126,9 @@ public class DialogManager : MonoBehaviour
             }
             else
             {
-                yield return null;
+                dialogText.text = "";
+                dialogText.text = dialogTexts[currentLine - 1];
+                break;
             }
         }
         isTyping = false;
