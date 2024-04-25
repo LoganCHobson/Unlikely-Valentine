@@ -153,5 +153,6 @@ public class DialogManager : MonoBehaviour
         dialogBox.SetActive(false);
         dialogText.gameObject.SetActive(false);
         portraitContainer.SetActive(false);
+        dialogTexts.Clear();
     }
 }
